@@ -51,8 +51,7 @@ public class StuInfoManagerController {
         //todo 校验token...
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-        responseUtils.setServerCode(200)
-                .setServerMsg("请求成功！");
+
 
         StudentInfoBean studentInfoBean = stuInfoManagerService.queryStuInfo("1", stuNo);
         responseUtils.setResultDataBean(studentInfoBean);
@@ -94,8 +93,7 @@ public class StuInfoManagerController {
 
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-        responseUtils.setServerCode(666)
-                .setServerMsg("请求成功！");
+
 
         List<StudentInfoBean> queryAllInfoBeanList = stuInfoManagerService.queryAllInfo("1", "1", "1");
 
@@ -126,8 +124,7 @@ public class StuInfoManagerController {
         //todo 校验token...
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-        responseUtils.setServerCode(200)
-                .setServerMsg("请求成功！");
+
 
         int resultCom = stuInfoManagerService.deleteStuAtStuNo("1", stuNo);
 
@@ -154,8 +151,7 @@ public class StuInfoManagerController {
     public String modifyStuInfo(String token, int id, String stuNo, String stuName, String sex, String nation, String birthday, String phone, String address, String speciality, String classes, String dorm, String tuition, String register, HttpServletResponse httpServletResponse) {
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-        responseUtils.setServerCode(200)
-                .setServerMsg("请求成功！");
+
 
         int resultCom = stuInfoManagerService.modifyStuInfo(token, id, stuNo, stuName, sex, nation, birthday, phone, address, speciality, classes, dorm, tuition, register);
 
@@ -181,8 +177,6 @@ public class StuInfoManagerController {
     public String addStuInfo(String token, String stuNo, String stuName, String sex, String nation, String birthday, String phone, String address, String speciality, String classes, String dorm, String tuition, String register, HttpServletResponse httpServletResponse) {
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-        responseUtils.setServerCode(200)
-                .setServerMsg("请求成功！");
 
         int resultCom = stuInfoManagerService.addStuInfo(token, stuNo, stuName, sex, nation, birthday, phone, address, speciality, classes, dorm, tuition, register);
 

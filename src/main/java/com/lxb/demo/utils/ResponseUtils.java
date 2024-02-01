@@ -2,7 +2,6 @@ package com.lxb.demo.utils;
 
 import com.google.gson.Gson;
 import com.lxb.demo.admin_stuInfoManager.ResultDataBean;
-import com.lxb.demo.base.ResponseBean;
 
 /**
  * 业务名:
@@ -18,51 +17,37 @@ import com.lxb.demo.base.ResponseBean;
 public class ResponseUtils {
 
     static ResponseUtils responseUtils = new ResponseUtils();
-    static ResponseBean responseBean;
+
+   static ResultDataBean resultDataBean = new ResultDataBean<>();
 
     public static ResponseUtils InitInstance() {
-        responseBean = new ResponseBean();
+        resultDataBean = new ResultDataBean<>();
         return responseUtils;
     }
 
-    public ResponseUtils setServerCode(int serverCode) {
-        responseBean.serverCode = serverCode;
-        return this;
-    }
 
-    public ResponseUtils setServerMsg(String serverMsg) {
-        responseBean.serverMsg = serverMsg;
-        return this;
-    }
+
 
 
     public <T> ResponseUtils setResultDataBean(T resultDataBeanT) {
-        ResultDataBean<T> rdb = new ResultDataBean<>();
-        rdb.resultData = resultDataBeanT;
-        responseBean.data = rdb;
+        resultDataBean.resultData = resultDataBeanT;
         return this;
     }
 
 
     public ResponseUtils setResultCode(int resultCode) {
-        if(responseBean.data==null){
-            responseBean.data = new ResultDataBean<>();
-        }
-        responseBean.data.resultCode = resultCode;
+        resultDataBean.resultCode = resultCode;
         return this;
     }
 
     public ResponseUtils setResultMsg(String resultMsg) {
-        if(responseBean.data==null){
-            responseBean.data = new ResultDataBean<>();
-        }
-        responseBean.data.resultMsg = resultMsg;
+        resultDataBean.resultMsg = resultMsg;
         return this;
     }
 
 
     public String toJson() {
-        return new Gson().toJson(responseBean);
+        return new Gson().toJson(resultDataBean);
     }
 
 
