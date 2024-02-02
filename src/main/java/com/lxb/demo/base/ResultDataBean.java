@@ -1,4 +1,4 @@
-package com.lxb.demo.admin_stuInfoManager;
+package com.lxb.demo.base;
 
 /**
  * 业务名:

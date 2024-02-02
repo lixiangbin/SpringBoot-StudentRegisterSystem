@@ -1,7 +1,8 @@
 package com.lxb.demo.utils;
 
 import com.google.gson.Gson;
-import com.lxb.demo.admin_stuInfoManager.ResultDataBean;
+import com.lxb.demo.base.ResultDataBean;
+
 
 /**
  * 业务名:

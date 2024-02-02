@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * 业务名:
+ * 业务名:对请求头 Header 中的中文参数统一解码
  * 功能说明:
  * 编写日期: 0001 2024/2/1.
  * 作者: 李相斌

@@ -1,5 +1,7 @@
 package com.lxb.demo.admin_stuInfoManager;
 
+import cn.dev33.satoken.stp.StpUtil;
+import com.lxb.demo.base.BaseController;
 import com.lxb.demo.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,9 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
-
-
-
 /**
  * 业务名:
  * 功能说明:
@@ -32,11 +31,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/stuInfoManager")
-public class StuInfoManagerController {
+public class StuInfoManagerController extends BaseController {
 
     @Autowired
     StuInfoManagerService stuInfoManagerService;
-
 
 
     /**
@@ -48,12 +46,9 @@ public class StuInfoManagerController {
     @RequestMapping(path = "/queryStuInfo" /*,produces = "application/json;charset=UTF-8"*/)
     public String queryStuInfo(String token, int stuNo, HttpServletResponse httpServletResponse) {
 
-        //todo 校验token...
+        StudentInfoBean studentInfoBean = stuInfoManagerService.queryStuInfo("1", stuNo);
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-
-
-        StudentInfoBean studentInfoBean = stuInfoManagerService.queryStuInfo("1", stuNo);
         responseUtils.setResultDataBean(studentInfoBean);
 
         if (studentInfoBean != null) {
@@ -77,40 +72,26 @@ public class StuInfoManagerController {
      */
 
     @CrossOrigin
-//    @ResponseBody
     @RequestMapping(path = "/queryAllInfoTest" /*,produces = "application/json;charset=UTF-8"*/)
-    public String queryAllInfoTest(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+    public String queryAllInfoTest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-
-
-        httpServletResponse.setStatus(200);
-
-        try {
-            httpServletResponse.addHeader("msg", URLEncoder.encode("测试","UTF-8") );
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-
+        String page = getRequestParamsMap(httpServletRequest).get("page");
+        System.out.println("" + page);
 
         ResponseUtils responseUtils = ResponseUtils.InitInstance();
-
-
-        List<StudentInfoBean> queryAllInfoBeanList = stuInfoManagerService.queryAllInfo("1", "1", "1");
-
+        List<StudentInfoBean> queryAllInfoBeanList = stuInfoManagerService.queryAllInfo("1", "1", page);
         if (queryAllInfoBeanList != null && queryAllInfoBeanList.size() > 0) {
             System.out.println(queryAllInfoBeanList);
-
             responseUtils.setResultDataBean(queryAllInfoBeanList)
                     .setResultCode(1)
                     .setResultMsg("查询成功");
         }
 
 
-        String header= httpServletRequest.getHeader("a");
-        System.out.println("请求头："+header);
-
         return responseUtils.toJson();
     }
+
+
 
 
     /**
@@ -171,7 +152,7 @@ public class StuInfoManagerController {
      * 说明：新增学生信息
      * 地址：
      * http://127.0.0.1:18902/admin/stuInfoManager/addStuInfo?stuNo=10210&stuName=测试名&sex=男&nation=汉&birthday=19990216&phone=16677772222&address=北京市海淀区&speciality=酒店管理&classes=3班&dorm=119&tuition=6980&register=1
-     * */
+     */
     @CrossOrigin
     @RequestMapping(path = "/addStuInfo" /*,produces = "application/json;charset=UTF-8"*/)
     public String addStuInfo(String token, String stuNo, String stuName, String sex, String nation, String birthday, String phone, String address, String speciality, String classes, String dorm, String tuition, String register, HttpServletResponse httpServletResponse) {

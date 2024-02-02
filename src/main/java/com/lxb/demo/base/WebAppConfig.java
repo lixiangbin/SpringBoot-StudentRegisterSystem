@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 业务名:
+ * 业务名: 配置
  * 功能说明:
  * 编写日期: 0024 2024/1/24.
  * 作者: 李相斌
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 修改内容：
  */
 
-//@Configuration
+@Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
 
@@ -29,8 +29,8 @@ public class WebAppConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        //WebMvcConfigurer.super.addInterceptors(registry);
-//        registry.addInterceptor(new AuthenticationIntercept())//添加拦截器
-//                .addPathPatterns("/admin/stuInfoManager/*");//要拦截的接口地址
+        WebMvcConfigurer.super.addInterceptors(registry);
+        registry.addInterceptor(new AuthenticationIntercept())//添加拦截器
+                .addPathPatterns("/admin/stuInfoManager/*");//要拦截的接口地址
     }
 }
